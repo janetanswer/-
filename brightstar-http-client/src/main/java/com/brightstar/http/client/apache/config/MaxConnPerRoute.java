@@ -6,7 +6,7 @@ public class MaxConnPerRoute {
 	int port;
 	int maxPerRoute;
 	
-	//姣忎釜Router鐨勮繛鎺ラ厤缃細IP^PORT^鏈�澶ц繛鎺ユ暟
+	//每个Router的连接配置：IP^PORT^最大连接数
 	//127.0.0.1^8080^10
 	public MaxConnPerRoute(String str) {
 		String[] stra = str.split("\\^");

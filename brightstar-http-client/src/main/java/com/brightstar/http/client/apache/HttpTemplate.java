@@ -22,10 +22,10 @@ public class HttpTemplate {
 
 	Logger logger = LoggerFactory.getLogger(HttpTemplate.class);
 	/**
-	 * 1.当使用了ResponseHandler，HttpClient 将自动确保释放连接到连接管理器中，而不管请求执行是否成功或引发异常。
-	 * 2.EntityUtils 提供了一些静态方法，可以更加容易地从实体中读取内容或信息。
-	 * 代替直接读取 java.io.InputStream，也可以使用这个类中的方法以字符串/字节数组的形式获取整个内容体。
-	 * 然而，在不能保证服务端是可信的且已知的长度限制的情况下，EntityUtils的使用是强烈不鼓励的
+	 * 1.��ʹ����ResponseHandler��HttpClient ���Զ�ȷ���ͷ����ӵ����ӹ������У�����������ִ���Ƿ�ɹ��������쳣��
+	 * 2.EntityUtils �ṩ��һЩ��̬���������Ը������׵ش�ʵ���ж�ȡ���ݻ���Ϣ��
+	 * ����ֱ�Ӷ�ȡ java.io.InputStream��Ҳ����ʹ��������еķ������ַ���/�ֽ��������ʽ��ȡ���������塣
+	 * Ȼ�����ڲ��ܱ�֤������ǿ��ŵ�����֪�ĳ������Ƶ�����£�EntityUtils��ʹ����ǿ�Ҳ�������
 	 */
 	ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
 

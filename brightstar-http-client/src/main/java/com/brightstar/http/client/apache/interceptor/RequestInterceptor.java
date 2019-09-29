@@ -14,9 +14,9 @@ import org.apache.http.protocol.HttpContext;
 import org.springframework.stereotype.Component;
 
 /**
- * è¯¥ç±»åŒ…å«äº†å¾ˆå¤šHttpRequestInterceptoræ¥å£çš„å®ç°ï¼Œç”¨äºå¤„ç†HttpRequeståè®®çš„ä¸€éƒ¨åˆ†
- * mapä¸­å­˜æ”¾äº†æ‰€æœ‰é¢„å…ˆå®šä¹‰çš„HttpRequestInterceptorï¼Œæ¯ä¸ªå®ç°æœ‰ä¸€ä¸ªå”¯ä¸€çš„åå­—ã€‚
- * å¯ä»¥é€šè¿‡é…ç½®InterceptorConfig#requestInterceptorNamesæ¥æŒ‡å®šHttpClientåˆå§‹åŒ–çš„æ—¶å€™åŠ è½½å“ªäº›HttpRequestInterceptor
+ * ¸ÃÀà°üº¬ÁËºÜ¶àHttpRequestInterceptor½Ó¿ÚµÄÊµÏÖ£¬ÓÃÓÚ´¦ÀíHttpRequestĞ­ÒéµÄÒ»²¿·Ö
+ * mapÖĞ´æ·ÅÁËËùÓĞÔ¤ÏÈ¶¨ÒåµÄHttpRequestInterceptor£¬Ã¿¸öÊµÏÖÓĞÒ»¸öÎ¨Ò»µÄÃû×Ö¡£
+ * ¿ÉÒÔÍ¨¹ıÅäÖÃInterceptorConfig#requestInterceptorNamesÀ´Ö¸¶¨HttpClient³õÊ¼»¯µÄÊ±ºò¼ÓÔØÄÄĞ©HttpRequestInterceptor
  * 
  */
 //@Component
@@ -24,8 +24,8 @@ public class RequestInterceptor {
 	
 	
 	/**
-	 * key:InterceptorConfig#requestInterceptorNamesä¸­çš„å…ƒç´ 
-	 * value:å®é™…çš„HttpRequestInterceptor
+	 * key:InterceptorConfig#requestInterceptorNamesÖĞµÄÔªËØ
+	 * value:Êµ¼ÊµÄHttpRequestInterceptor
 	 */
 	Map<String,HttpRequestInterceptor> map = new HashMap<String,HttpRequestInterceptor>();
 	

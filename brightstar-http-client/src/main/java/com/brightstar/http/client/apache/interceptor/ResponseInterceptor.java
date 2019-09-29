@@ -16,9 +16,9 @@ import org.apache.http.protocol.HttpContext;
 import org.springframework.stereotype.Component;
 
 /**
- * è¯¥ç±»åŒ…å«äº†å¾ˆå¤šHttpResponseInterceptoræ¥å£çš„å®ç°ï¼Œç”¨äºå¤„ç†HttpResponseåè®®çš„ä¸€éƒ¨åˆ†
- * mapä¸­å­˜æ”¾äº†æ‰€æœ‰é¢„å…ˆå®šä¹‰çš„HttpResponseInterceptorï¼Œæ¯ä¸ªå®ç°æœ‰ä¸€ä¸ªå”¯ä¸€çš„åå­—ã€‚
- * å¯ä»¥é€šè¿‡é…ç½®InterceptorConfig#responseInterceptorNamesæ¥æŒ‡å®šHttpClientåˆå§‹åŒ–çš„æ—¶å€™åŠ è½½å“ªäº›HttpResponseInterceptor
+ * ¸ÃÀà°üº¬ÁËºÜ¶àHttpResponseInterceptor½Ó¿ÚµÄÊµÏÖ£¬ÓÃÓÚ´¦ÀíHttpResponseĞ­ÒéµÄÒ»²¿·Ö
+ * mapÖĞ´æ·ÅÁËËùÓĞÔ¤ÏÈ¶¨ÒåµÄHttpResponseInterceptor£¬Ã¿¸öÊµÏÖÓĞÒ»¸öÎ¨Ò»µÄÃû×Ö¡£
+ * ¿ÉÒÔÍ¨¹ıÅäÖÃInterceptorConfig#responseInterceptorNamesÀ´Ö¸¶¨HttpClient³õÊ¼»¯µÄÊ±ºò¼ÓÔØÄÄĞ©HttpResponseInterceptor
  * 
  */
 //@Component
