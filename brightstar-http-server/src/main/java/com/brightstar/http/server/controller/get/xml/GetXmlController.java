@@ -13,31 +13,29 @@ public class GetXmlController {
 	Logger logger = LoggerFactory.getLogger(GetXmlController.class);
 	
 	
-
-	@RequestMapping("/getRes")
-	public @ResponseBody XmlResponse getJson_getRes() {
+	/**
+	 * 测试链接：http://localhost:8080/brightstar/getxml/getName
+	 * ResponseBody: 
+	<XmlResponse>
+		<name>key</name>
+		<certnoList>
+			<order>110105</order>
+			<order>KSE231</order>
+		</certnoList>
+	</XmlResponse>
+	 * */
+	@RequestMapping(value = "/getName",produces = "application/xml")
+	@ResponseBody
+	public XmlResponse getName() {
 		
-		logger.info("---->brightstar/getxml/getRes request:");
+		logger.info("---->brightstar/getxml/getName request:");
 		XmlResponse ret = new XmlResponse("key");
+		ret.addCert("110105");
+		ret.addCert("KSE231");
 		logger.info("<----brightstar/getxml/getRes response:{}",ret.toString());
 		return ret;
 	
 	}
-	
-	
-
-//	@RequestMapping("/getOrderInfo")
-//	JsonResponse getJson_getOrderInfo(JsonRequest person) {
-//		
-//		logger.info("---->brightstar/getjson/getOrderInfo\n request:{}",person.toString());
-//		JsonResponse ret = new JsonResponse(person.getName(),LocalDateTime.now(),"food");
-//		logger.info("<----brightstar/getjson/getOrderInfo\n response:{}",ret.toString());
-//		return ret;
-//	
-//	}
-	
-
-	
 	
 
 }
