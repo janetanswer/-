@@ -6,7 +6,9 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +29,7 @@ public class PostXmlController {
 	 * 
 	 * Postman测试1：
 	 * 链接：http://localhost:8080/brightstar/postXml/postPerson
-	 * 参数：
+	 * 参数：Body->raw->XML
 <Person>
     <name>key</name>
     <age>8</age>
@@ -42,8 +44,8 @@ public class PostXmlController {
 	 * 
 	 * 
 	 */
-
-	@RequestMapping(value = "/postPerson", method = RequestMethod.POST, consumes="application/xml",produces = {"application/xml;charset=UTF-8"})
+	@PostMapping(value = "/postPerson", consumes = { MediaType.APPLICATION_XML_VALUE }, produces = MediaType.APPLICATION_XML_VALUE)
+//	@RequestMapping(value = "/postPerson", method = RequestMethod.POST, consumes="application/xml",produces = {"application/xml;charset=UTF-8"})
 	@ResponseBody
 	public Response postPerson(@RequestBody @Valid Person person,BindingResult bindingResult){
 		logger.info("---->brightstar/postObj/postID request:{}",person);
