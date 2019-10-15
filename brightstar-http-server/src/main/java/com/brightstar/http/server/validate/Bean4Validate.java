@@ -21,11 +21,16 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -35,6 +40,8 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
+@JsonPropertyOrder({"memid","name"})
+@JacksonXmlRootElement(localName = "Request")
 public class Bean4Validate {
 
 	/**
@@ -72,17 +79,16 @@ public class Bean4Validate {
 	 * 不能再校验List中的String
 	 */
 	@NotEmpty(message="证件号不能为空")
-	private List<String> certs;
+	@JacksonXmlElementWrapper(localName = "certs")
+	private List<String> cert;
 
 	/**
 	 * 添加上@Valid后可以校验List中的对象
 	 */
 	@NotEmpty(message="会员卡号不能为空")
 	@Valid
+	@JacksonXmlElementWrapper(useWrapping = false)
 	private List<MemCard> memnos;
-
-	@Valid
-	Home home;
 	
 	/**
 	 * 添加上@Valid后可以校验Map中的对象
@@ -91,30 +97,20 @@ public class Bean4Validate {
 	@Valid
 	private Map<String,Home> homes;
 
+	@JsonUnwrapped
+	@Valid
+	Telephone tel;
+	
+	@JsonIgnore
+	private String ignore;
+	
+
+	
 	public Bean4Validate() {
 	}
 
 
-	public Bean4Validate(@NotBlank(message = "memid不能为空") String memid,
-			@Length(min = 2, max = 8, message = "姓名长度必须在2-8之间") String name, @Email(message = "邮箱格式错误") String email,
-			@Range(min = 18, max = 70, message = "年龄必须在18到70之间") int age, @AssertTrue(message = "必须是人类") boolean person,
-			@Past(message = "注册日期有误") LocalDateTime insertTime,
-			@Pattern(regexp = "([A-Z1-9][A-Z1-9])(\\d{1,4})([A-Z]?)", message = "航班号不正确") String flightNo,
-			@NotEmpty(message = "证件号不能为空") List<String> certs,
-			@NotEmpty(message = "会员卡号不能为空") @Valid List<MemCard> memnos, @Valid Home home, Map<String, Home> homes) {
-		super();
-		this.memid = memid;
-		this.name = name;
-		this.email = email;
-		this.age = age;
-		this.person = person;
-		this.insertTime = insertTime;
-		this.flightNo = flightNo;
-		this.certs = certs;
-		this.memnos = memnos;
-		this.home = home;
-		this.homes = homes;
-	}
+
 
 
 
@@ -174,14 +170,6 @@ public class Bean4Validate {
 		this.flightNo = flightNo;
 	}
 
-	public List<String> getCerts() {
-		return certs;
-	}
-
-	public void setCerts(List<String> certs) {
-		this.certs = certs;
-	}
-
 	public List<MemCard> getMemnos() {
 		return memnos;
 	}
@@ -190,14 +178,55 @@ public class Bean4Validate {
 		this.memnos = memnos;
 	}
 
-	public Home getHome() {
-		return home;
+	public List<String> getCert() {
+		return cert;
 	}
 
-	public void setHome(Home home) {
-		this.home = home;
+	public void setCert(List<String> cert) {
+		this.cert = cert;
 	}
 
+	public Map<String, Home> getHomes() {
+		return homes;
+	}
+
+	public void setHomes(Map<String, Home> homes) {
+		this.homes = homes;
+	}
+	
+	public String getIgnore() {
+		return ignore;
+	}
+
+	public void setIgnore(String ignore) {
+		this.ignore = ignore;
+	}
+
+	public Telephone getTel() {
+		return tel;
+	}
+
+	public void setTel(Telephone tel) {
+		this.tel = tel;
+	}
+	
+	public static Bean4Validate example() {
+		Bean4Validate bean = new Bean4Validate();
+		bean.setAge(36);
+		bean.setCert(new ArrayList<String>() {{add("ni123456");add("ni654321");}});
+		bean.setEmail("key@gmail.com");
+		bean.setFlightNo("CA101");
+		bean.setInsertTime(LocalDateTime.now());
+		bean.setMemid("memid123");
+		bean.setName("KeyLee");
+		bean.setPerson(true);
+		bean.setMemnos(new ArrayList<MemCard>() {{add(new MemCard("mem12345"));add(new MemCard("mem54321"));}});
+		bean.setHomes(new HashMap<String,Home>(){{put("home1",new Home("慧忠"));put("home2",new Home("紫玉"));}});
+		bean.setTel(new Telephone("13812344321"));
+		return bean;
+	}
+	
+	
 	public String toJson() throws JsonProcessingException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -216,6 +245,9 @@ public class Bean4Validate {
 		javaTimeModule.addDeserializer(LocalTime.class,
 				new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateTimeFormatConstants.DEFAULT_TIME_FORMAT)));
 		objectMapper.registerModule(javaTimeModule).registerModule(new ParameterNamesModule());
+		
+		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+		
 		return objectMapper.writeValueAsString(this);
 	}
 
@@ -238,41 +270,23 @@ public class Bean4Validate {
 				new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateTimeFormatConstants.DEFAULT_TIME_FORMAT)));
 		objectMapper.registerModule(javaTimeModule).registerModule(new ParameterNamesModule());
  
+		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+		
 		return objectMapper.writeValueAsString(this);
 	}
 
-
-
-	public Map<String, Home> getHomes() {
-		return homes;
-	}
-
-
-
-	public void setHomes(Map<String, Home> homes) {
-		this.homes = homes;
-	}
-	
-	public static Bean4Validate getTureBean() {
-		Bean4Validate bean = new Bean4Validate();
-		bean.setAge(36);
-		bean.setCerts(new ArrayList<String>() {{add("ni123456");add("ni654321");}});
-		bean.setEmail("key@gmail.com");
-		bean.setFlightNo("CA101");
-		bean.setInsertTime(LocalDateTime.now());
-		bean.setMemid("memid123");
-		bean.setName("KeyLee");
-		bean.setPerson(true);
-		bean.setMemnos(new ArrayList<MemCard>() {{add(new MemCard("mem12345"));}});
-		bean.setHome(new Home("紫玉山庄"));
-		bean.setHomes(new HashMap<String,Home>(){{put("home1",new Home("慧忠里"));}});
-		return bean;
-	}
 	
 	public static void main(String[] args) throws JsonProcessingException {
 		
-//		System.out.println(getTureBean().toJson());
-		System.out.println(getTureBean().toXml());
+//		System.out.println(example().toJson());
+		System.out.println(example().toXml());
 	}
+
+
+
+
+
+
+
 
 }

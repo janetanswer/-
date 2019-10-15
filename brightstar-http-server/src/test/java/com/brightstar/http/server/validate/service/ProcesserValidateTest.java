@@ -15,11 +15,17 @@ public class ProcesserValidateTest {
 	@Autowired
 	Processer processer;
 	
+//	@Test(expected= ConstraintViolationException.class)
 	@Test
 	public void test() {
-		Bean4Validate bean = Bean4Validate.getTureBean();
+		Bean4Validate bean = Bean4Validate.example();
 		bean.setAge(8);
-		System.out.println(processer.process(bean));
+		try {
+			processer.process(bean);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 
 }

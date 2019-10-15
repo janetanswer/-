@@ -3,6 +3,8 @@ package com.brightstar.http.server.controller.post.xml;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
 
 
 /**
@@ -42,6 +44,7 @@ import javax.validation.constraints.NotNull;
  * 
  * */
 
+@JacksonXmlRootElement(localName = "Person")
 public class Person {
 
 	

@@ -13,17 +13,39 @@
  * @NotBlank        只能用于字符串不为null，并且字符串trim()以后length要大于0
  * 
  * 2. Bean4Validate转换成json、xml字符串。
- * 包括日期的转换。
+ * Bean里的所有set、get方法一定要注意！！！！！！！最好不要写get方法，会影响序列化结果
+ * 
+ * 日期的转换:
+ * objectMapper.registerModule(javaTimeModule).registerModule(new ParameterNamesModule());
  * @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss"):加了这个注解，Controller底层是可以直接应用这个注解的，但是自定义的ObjectMapper还得经过一些处理才能使用该注解
  * 
+ * 序列化时候忽略为空的属性
+ * 1. objectMapper.setSerializationInclusion(Include.NON_EMPTY);
+ * 或者
+ * 2.@JsonInclude注解
+ * @JsonInclude(Include.NON_DEFAULT) 属性为默认值不序列化
+ * @JsonInclude(Include.NON_EMPTY) 属性为 空（“”） 或者为 NULL 都不序列化
+ * @JsonInclude(Include.NON_NULL) 属性为NULL 不序列化
+ * 
+ * 序列化的时候忽略某些属性
+ * 1. @JsonIgnore
+ * 2. @JsonIgnoreProperties
+ * 
+ * 指定某个字段(类型是POJO)序列化成扁平化，而不是嵌套对象，在反序列化时再包装成对象
+ * @JsonUnwrapped
+ * 
+ * 序列化的字符串是format好的
+ * objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
  * 
  * 
- * 
- * 
- * 
+ * 序列化为xml字符串时拆除List元素的包装
+ * @JacksonXmlElementWrapper
  * 
  *
  */
 package com.brightstar.http.server.validate;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
