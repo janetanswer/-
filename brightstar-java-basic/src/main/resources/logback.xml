@@ -1,0 +1,36 @@
+<configuration>
+
+	
+
+
+	<!-- 标准控制台输出 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d  [%thread]> %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+  
+  	<!-- 总开关
+  	<logger name="demo.designpattern" level="DEBUG"/>
+  	 -->
+  	 
+  	 
+  	 
+  	 
+  
+	
+	 
+	 
+	
+
+
+
+
+
+</configuration>
