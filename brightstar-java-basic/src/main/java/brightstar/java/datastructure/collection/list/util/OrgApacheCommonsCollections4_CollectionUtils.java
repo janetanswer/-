@@ -13,14 +13,20 @@ public class OrgApacheCommonsCollections4_CollectionUtils {
 	static final Logger logger = LoggerFactory.getLogger(OrgApacheCommonsCollections4_CollectionUtils.class);
 	
 	static List<Long> longlist = new ArrayList<Long>() {{add(5l);add(1l);add(2l);add(8l);}};
-	static List<Long> strlist = null;
-	static List<Long> strlist2 = new ArrayList<Long>();
+	static List<String> strlist = null;
+	static List<String> strlist2 = new ArrayList<String>();
 	
 	public static void main(String[] args) {
 
 		System.out.println(CollectionUtils.isEmpty(longlist));
 		System.out.println(CollectionUtils.isEmpty(strlist));
 		System.out.println(CollectionUtils.isEmpty(strlist));
+		
+		/**/
+		strlist = new ArrayList<String>() {{add("CA");add("MU");}};
+		System.out.println(strlist.contains("CA"));
+		System.out.println(strlist.contains("FM"));
+//		CollectionUtils.containsAny(arg0, arg1);
 	
 	} 
 	

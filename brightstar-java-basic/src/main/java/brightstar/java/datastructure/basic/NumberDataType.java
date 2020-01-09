@@ -8,6 +8,10 @@ public class NumberDataType {
 	final static Logger logger = LoggerFactory.getLogger(NumberDataType.class);
 	
 	/**
+	 * 1KB = 1024Byte
+	 * 1MB = 1024KB
+	 * ……
+	 * 
 	 * 整数型: 
 	 * 1) byte-Byte
 	 * 		默认值:0/null
@@ -15,6 +19,7 @@ public class NumberDataType {
 	 * 		取值范围-128[1000 0000]取反[0111 1111]补1[1000 0000]]~127[0111 1111]
 	 * 		ASCII码表范围内的字符(英文字符、控制字符)占用一个byte的空间
 	 * 		在需要节省存储空间的时候可以考虑使用byte类型
+	 * 		
 	 * 
 	 * 2) short-Short 
 	 * 		默认值:0/null

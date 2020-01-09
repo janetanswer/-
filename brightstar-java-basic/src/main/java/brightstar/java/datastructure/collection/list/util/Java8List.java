@@ -14,17 +14,19 @@ public class Java8List {
 	final static ArrayList<String> arrayList = new ArrayList<String>();
 	
 	public final static void main(String[] args) {
-
-		
+		init("ele1","ele2","ele3","ele4","ele5");
+		arrayList.stream().forEach(x->{System.out.println(x);});
+		arrayList.parallelStream().forEach(x->{System.out.println(x);});
+	}
+	
+	private static void init(String ... strings ) {
+		arrayList.clear();
+		for(int i=0;i<strings.length;i++) {
+			arrayList.add(strings[i]);
+		}
 	}
 	
 	private static void arraylist_oper_stream() {
-		arrayList.add("ele1");
-		arrayList.add("ele2");
-		arrayList.add("ele3");
-		arrayList.add("f1");
-		arrayList.add("f2");
-		arrayList.add("f3");
 		
 		/*过滤*/
 		List<String> filterRet = arrayList.stream().filter(x->{
@@ -34,8 +36,6 @@ public class Java8List {
 			return false;
 		}).collect(Collectors.toList());
 		System.out.println(filterRet.toString());
-		
-		/**/
 		
 		
 	}
