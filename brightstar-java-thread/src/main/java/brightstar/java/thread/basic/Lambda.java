@@ -1,6 +1,6 @@
 package brightstar.java.thread.basic;
 
-public class App {
+public class Lambda {
 
 	public static void main(String[] args) {
 		//Thread

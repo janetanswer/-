@@ -1,4 +1,4 @@
-package brightstar.java.lambda;
+package brightstar.java.basic.lambda;
 
 public class LambdaExample {
 

@@ -1,4 +1,4 @@
-package brightstar.java.lambda.functionalInterface;
+package brightstar.java.basic.lambda.functionalInterface;
 
 
 
